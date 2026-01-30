@@ -1,0 +1,57 @@
+﻿@page "/display"
+@using Frontend.Components.Model
+@using System.Threading.Tasks
+@rendermode @(new InteractiveServerRenderMode(prerender:false ))
+
+@inject HttpClient http
+@inject AppSettings appsettings
+
+<div>
+	<h2 class="Head">Student_Records</h2>
+	<table>
+		<thead>
+			<tr>
+				<td>SID</td>
+				<td>NickName</td>
+				<td>Name</td>
+				<td>RollNo</td>
+				<td>DeptCode</td>
+				<td>MobileNo</td>
+				<td>Emailid</td>
+				@* <td>Action</td> *@
+			</tr>
+		</thead>
+		<tbody>
+				@foreach(var data in res_data)
+				{
+				<tr>
+						<td>@data.SID</td>
+						<td>@data.NickName</td>
+						<td>@data.Name</td>
+						<td>@data.RollNo</td>
+						<td>@data.DeptCode</td>
+						<td>@data.MobileNo</td>
+						<td>@data.EmailiD</td>
+						@* <button @onclick="()=>Student_Delete(data.SID)">Delete</button> *@
+					</tr>
+				}
+		</tbody>
+	</table>
+</div>
+
+@code{
+	IList<Student> res_data = new List<Student>();
+	protected override async Task OnInitializedAsync()
+	{
+		var res = await http.GetAsync($"{appsettings.url}Student/Student_Data");
+		res_data = await res.Content.ReadFromJsonAsync<List<Student>>();
+		StateHasChanged();
+	}
+	// private async void Student_Delete(int sid)
+	// {
+	// 	var res = await http.DeleteAsync($"{appsettings.url}Student/deleteStudent",sid);
+	// 	Console.WriteLine(res);
+	// 	StateHasChanged();
+	// }
+
+}

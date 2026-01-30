@@ -1,0 +1,47 @@
+﻿@page "/student"
+@using Frontend.Components.Model
+@using System.Net.Http.Json
+
+@rendermode @(new InteractiveServerRenderMode(prerender:false))
+
+
+@inject HttpClient http
+@inject AppSettings appsettings
+
+<div class="container-fluid">
+	<h2 class="Head">Add_Student</h2>
+	<div class="row">
+		<h3>Form</h3>
+		<EditForm class="form" Model="@_std" OnSubmit="@BtnSave">
+			<input @bind="@_std.NickName" placeholder="Nick Name"/>
+			<input @bind="@_std.Name" placeholder="Name"/>
+			<input @bind="@_std.RollNo" placeholder="RollNo"/>
+			<input @bind="@_std.DeptCode" placeholder="DeptCode"/>
+			<input @bind="@_std.MobileNo" placeholder="MobileNo"/>
+			<input @bind="@_std.EmailiD" placeholder="Emailid"/>
+			<button type="submit">Submit</button>
+		</EditForm>
+	</div>
+</div>
+
+@code {
+	Student _std=new();
+	private async Task BtnSave()
+	{
+		var res = await http.PostAsJsonAsync($"{appsettings.url}Student/addStudent", _std);
+		if(res.IsSuccessStatusCode)
+		{
+			Console.WriteLine("Successfully Inserted");
+			_std.NickName=null;
+			_std.Name=null;
+			_std.RollNo=null;
+			_std.MobileNo=null;
+			_std.EmailiD=null;
+			_std.DeptCode = 0;
+		}else
+		{
+			Console.WriteLine("Not Inserted");
+		}
+		StateHasChanged();
+	}
+}

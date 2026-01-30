@@ -1,0 +1,53 @@
+﻿table{
+    gap:10px;
+}
+td {
+    align-content: center;
+    justify-content: center;
+    padding: 10px;
+    text-align: center;
+}
+tr{
+    border-color:antiquewhite;
+    border-radius:50px;
+}
+thead td{
+    background-color: forestgreen;
+    color:aliceblue;
+}
+
+.row h3 {
+    background-color: forestgreen;
+    color: aliceblue;
+    padding:20px;
+    border-radius:5px;
+}
+tbody td{
+    background-color:antiquewhite;
+}
+.row {
+
+    align-items:center;
+    width: 100%;
+    text-align:center;
+    max-width: 420px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: antiquewhite;
+    border-radius: 12px;
+}
+input {
+    padding: 10px;
+    width: 300px;
+    margin-bottom:10px;
+    border-radius:14px;
+}
+.row button{
+    background-color:aquamarine;
+    padding:20px;
+    border-radius:15px;
+}
+.Head{
+    color:cadetblue;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
